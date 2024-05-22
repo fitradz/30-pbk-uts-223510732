@@ -17,12 +17,12 @@
       </div>
       <ul>
         <li v-for="(activity, index) in filteredActivities" :key="index">
-          <span :class="{ 'completed': activity.completed }">{{ activity.name }}</span>
-          <button @click="cancelActivity(index)">Batal</button>
-          <button @click="toggleComplete(index)">
+          <span :class="{ 'completed': activity.completed, 'activity-name': true }">{{ activity.name }}</span>
+          <button @click="cancelActivity(index)" class="activity-button">Batal</button>
+          <button @click="toggleComplete(index)" class="activity-button">
             {{ activity.completed ? 'Batal Checklist' : 'Checklist' }}
           </button>
-          <button @click="editActivity(index)">Edit</button>
+          <button @click="editActivity(index)" class="activity-button">Edit</button>
         </li>
       </ul>
       <button @click="filterCompleted">
@@ -112,7 +112,6 @@ export default {
 
 <style>
 /* General Styles */
-/* General Styles */
 #app {
     font-family: Arial, sans-serif;
     max-width: 600px;
@@ -120,7 +119,10 @@ export default {
     padding: 20px;
     color: #333;
 }
-
+.input-container {
+  display: flex;
+  margin-bottom: 20px;
+} 
 /* Styles for Navigation */
 header nav ul {
     list-style-type: none;
@@ -140,7 +142,7 @@ header nav ul li a {
 
 /* Styles for Todos */
 .todos-container {
-    background-color:;
+    background-color: #f4f4f9;
     padding: 20px;
     border-radius: 5px;
     margin-bottom: 20px;
@@ -148,7 +150,7 @@ header nav ul li a {
 
 .todos-container h1 {
     margin-top: 0;
-    color:#fff;
+    color: #333;
 }
 
 .todos-container .input-container {
@@ -168,7 +170,7 @@ header nav ul li a {
     padding: 10px 20px;
     font-size: 16px;
     background-color: #007bff;
-    color: none;
+    color: #fff;
     border: none;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
@@ -181,10 +183,21 @@ header nav ul li a {
 
 .todos-container li {
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
 }
 
 .todos-container .completed {
     text-decoration: line-through;
+}
+
+.todos-container .activity-name {
+    color: #007bff; /* New font color for activities */
+    margin-right: 10px; /* Add margin to the right of activity name */
+}
+
+.todos-container .activity-button {
+    margin-right: 5px; /* Add margin between buttons */
 }
 
 /* Styles for Posts */
