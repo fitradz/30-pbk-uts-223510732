@@ -1,31 +1,23 @@
-import { createStore } from 'vuex';
+// store.js
+import { createPinia, defineStore } from 'pinia';
 
-export default createStore({
-  state() {
-    return {
-      activities: []
-    };
-  },
-  mutations: {
-    addActivity(state, activity) {
-      state.activities.push(activity);
-    },
-    cancelActivity(state, index) {
-      state.activities.splice(index, 1);
-    },
-    toggleComplete(state, index) {
-      state.activities[index].completed = !state.activities[index].completed;
-    }
-  },
+export const useActivitiesStore = defineStore({
+  id: 'activities',
+  state: () => ({
+    activities: []
+  }),
   actions: {
-    addActivity({ commit }, activity) {
-      commit('addActivity', activity);
+    addActivity(activity) {
+      this.activities.push(activity);
     },
-    cancelActivity({ commit }, index) {
-      commit('cancelActivity', index);
+    cancelActivity(index) {
+      this.activities.splice(index, 1);
     },
-    toggleComplete({ commit }, index) {
-      commit('toggleComplete', index);
+    toggleComplete(index) {
+      this.activities[index].completed = !this.activities[index].completed;
     }
   }
 });
+
+const pinia = createPinia();
+export default pinia;
